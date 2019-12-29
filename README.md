@@ -1,1 +1,1 @@
-# graphql-crm
+# A Restful Nodejs CRM
