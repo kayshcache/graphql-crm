@@ -2,7 +2,15 @@ import { Contacts } from './dbConnectors';
 
 export const resolvers = {
 	Query: {
-		getContacts: () => Contacts.find()
+		getContacts: () => Contacts.find(),
+		getOneContact: (root, { id}) => {
+			return new Promise((resolve, object) => {
+				Contacts.findById(id, (err, contact) => {
+					if (err) reject(err)
+					else resolve(contact)
+				});
+			});
+		}
 	},
 	Mutation: {
 		createContact: (root, { input}) => {
@@ -18,6 +26,23 @@ export const resolvers = {
 				newContact.save(err => {
 					if (err) reject(err)
 					else resolve(newContact)
+				});
+			});
+		},
+		updateContact: (root, { input}) => {
+                        return new Promise((resolve, object) => {
+				Contacts.findOneAndUpdate({ _id: input.id }, input, { new: true }, (err, contact) => {
+					if (err) reject(err)
+					else resolve(contact)
+				});
+			});
+
+		},
+		deleteContact: (root, { id }) => {
+			return new Promise((resolve, object) => {
+				Contacts.remove({ _id: id }, err => {
+					if (err) reject(err)
+					else resolve('Contact has been deleted')
 				});
 			});
 		}
