@@ -1,5 +1,5 @@
 {
-  "name": "restful-nodejs-crm",
+  "name": "graphql-nodejs-crm",
   "version": "1.0.0",
   "description": "CRM backend",
   "main": "index.js",
@@ -8,21 +8,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kayshcache/restful-nodejs-crm.git"
+    "url": "git+https://github.com/kayshcache/graphql-crm.git"
   },
   "author": "Kaysh Cache",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/kayshcache/restful-nodejs-crm/issues"
+    "url": "https://github.com/kayshcache/graphql-crm/issues"
   },
-  "homepage": "https://github.com/kayshcache/restful-nodejs-crm#readme",
+  "homepage": "https://github.com/kayshcache/graphql-crm#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
     "mongodb": "^3.3.4",
-    "mongoose": "^5.7.10",
-    "nodemon": "^1.19.4"
+    "mongoose": "^5.8.3",
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,35 +1,25 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import routes from './src/routes/crmRoutes';
+import graphqlHTTP from 'express-graphql';
+import { schema } from './src/data/schema';
 
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
-const DB_CREDENTIALS = process.env.DB_CREDENTIALS;
-
-// Mongoose connection
-mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb+srv://${DB_CREDENTIALS}@coder-g8zwo.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
-	useUnifiedTopology: true,
-	useNewUrlParser: true,
-});
-
-// Body Parser setup
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-routes(app);
+const PORT = 8080;
 
 // Serving static files
 app.use(express.static('public'));
 
 app.get('/', (req, res) =>
-	res.send(`Node and express server running on port ${PORT}`)
+	res.send(`GraphQL is running!`)
 );
 
+app.use('/graphql', graphqlHTTP({
+	schema: schema,
+	graphiql: true
+}));
+
 app.listen(PORT, () =>
-	console.log(`Your server is running on port ${PORT}`)
+	console.log(`Your server is running at localhose:${PORT}/graphql`)
 );
